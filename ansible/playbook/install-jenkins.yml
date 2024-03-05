@@ -1,0 +1,47 @@
+---
+- name: Install jenkins container for jenkins ec2
+  hosts: all
+  gather_facts: true
+  become: yes
+  tasks:
+    # Tạo docker compose file sẽ deploy jenkins container
+    - name: Create Docker Compose file
+      shell: |
+        echo '
+        version: "3"
+        services:
+          jenkins:
+            image: duongtn1512/jenkins_docker:v3
+            container_name: jenkins
+            ports:
+              - "8080:8080"
+              - "50000:50000"
+
+            volumes:
+              - jenkins_home:/var/jenkins_home
+              - /var/run/docker.sock:/var/run/docker.sock
+              - /usr/bin/docker:/usr/bin/docker
+
+        volumes:
+          jenkins_home:
+        ' > /home/ubuntu/compose.yaml
+
+    # Chạy jenkins container bằng cái file docker compoes được viết trước đó
+    - name: Run jenkins container
+      shell: |
+        docker-compose -f /home/ubuntu/compose.yaml up -d
+
+    # Ngủ khoảng 15s
+    - name: Wait for jenkins container run up
+      shell: |
+        sleep 15
+
+    # Lấy ra mật khẩu cảu jenkins container
+    - name: Get Jenkins Password
+      command: docker exec jenkins cat /var/jenkins_home/secrets/initialAdminPassword
+      register: command_output
+
+    # In ra mật khẩu qua màn hình terraform kích hoạt ansible
+    - debug:
+        var: command_output.stdout_lines # In ra mật khẩu Jenkins
+
