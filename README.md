@@ -7,7 +7,5 @@ Deploy a RandomQuoteApp using one terraform command
 2. Open draw.io on web browser
 3. Chose existing diagram and point to Diagram.drawio u just downloaded
 
-![alt text](https://github.com/NTD151298/RandomQuoteApp/tree/main/Project-structure.png?raw=true)
+![alt text](https://github.com/NTD151298/RandomQuoteApp/tree/main/Project-structure.png)
 
-# https://github.com/NTD151298/RandomQuoteApp/tree/main
-# ![alt text](https://github.com/[username]/[reponame]/blob/[branch]/image.jpg?raw=true)
