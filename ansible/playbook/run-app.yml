@@ -6,7 +6,7 @@
     # Copy zip file
     - name: Copy zip files from local to remote ...
       copy:
-        src: /home/duongtn1512/Terraform/ansible/App.tar.gz  
+        src: /home/duongnt01/RandomQuoteApp/ansible/App.tar.gz  
         dest: /home/ubuntu 
     # Unzip the tar files
     - name: Unziping App.tar.gz ...
